@@ -1,0 +1,121 @@
+/* Базовые стили каталога */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Бледно-голубой фон */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #005df9; /* Электрический синий */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+li {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+li:hover {
+    transform: translateY(-5px);
+}
+
+a {
+    text-decoration: none;
+    color: #005df9;
+}
+
+/* Стили для страницы Подробнее (формат Reels/TikTok) */
+.detail-page-body {
+    background-color: #f0f8ff; /* Сохраняем бледно-голубой фон */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Занимает всю высоту экрана */
+}
+
+/* Белая шапка-хедер */
+.detail-header {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Кнопка "Домой" (Название проекта) */
+.home-link {
+    font-size: 20px;
+    font-weight: bold;
+    color: #005df9; /* Электрический синий */
+    text-decoration: none;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
+/* Выравнивание плеера по центру оставшегося экрана */
+.video-layout {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Контейнер в виде "смартфона" (TikTok формат) */
+.tiktok-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Ширина мобильного устройства */
+    aspect-ratio: 9/16;
+    background: #000;
+    border-radius: 20px; /* Скругляем углы самого плеера */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Тень, чтобы отделить от фона */
+    overflow: hidden; /* Обрезаем видео, чтобы оно не вылезало за скругления */
+}
+
+.tiktok-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняет экран плеера, обрезая края */
+}
+
+.description-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.45); /* Полупрозрачная подложка */
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    
+    /* Ограничение текста в 4 строки с многоточием */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.hotel-./assets/image {
+    width: 100%;             /* Картинка занимает всю ширину карточки */
+    height: 200px;           /* Фиксированная высота */
+    object-fit: cover;       /* Обрезает картинку без искажения пропорций */
+    border-radius: 6px;      /* Слегка скругляем углы */
+    margin-bottom: 10px;
+}

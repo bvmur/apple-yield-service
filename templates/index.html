@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Месяцы</h1>
+    <ul>
+        {% for month in months %}
+        <li>
+            <a href="/month/{{ month.id }}">
+            <h2>{{ month.title }}</h2>
+            </a>
+            <p>{{ month.phase }}</p>
+            <p>{{ month.norm_temp }}°C</p>
+            <p>{{ month.norm_precip }} мм</p>
+            
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

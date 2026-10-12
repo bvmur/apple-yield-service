@@ -11,7 +11,8 @@
         {% for month in months %}
         <li>
             <a href="/month/{{ month.id }}">
-            <h2>{{ month.title }}</h2>
+                <img src="{{ month.image_url }}" alt="{{ month.title }}" class="month-image">
+                <h2>{{ month.title }}</h2>
             </a>
             <p>{{ month.phase }}</p>
             <p>{{ month.norm_temp }}°C</p>

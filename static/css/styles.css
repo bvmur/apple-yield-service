@@ -112,7 +112,7 @@ a {
     overflow: hidden;
 }
 
-.hotel-./assets/image {
+.month-image {
     width: 100%;             /* Картинка занимает всю ширину карточки */
     height: 200px;           /* Фиксированная высота */
     object-fit: cover;       /* Обрезает картинку без искажения пропорций */

@@ -10,7 +10,7 @@ months_db = [
         "impact": 1,               # значимость для урожая: 1 — низкая, 2 — средняя, 3 — высокая
         "description": "Сад просыпается: набухают почки. Поздний снег и заморозки ещё опасны.",
         "image_url": "/static/img/april.jpg",
-        "video_url": "/static/video/april.mp4",
+        "video_url": "/static/img/april.mp4",
     },
     {
         "id": 2,
@@ -22,7 +22,7 @@ months_db = [
         "impact": 3,
         "description": "Время цветения и опыления. Главная угроза месяца — возвратные заморозки.",
         "image_url": "/static/img/may.jpg",
-        "video_url": "/static/video/may.mp4",
+        "video_url": "/static/img/may.mp4",
     },
     {
         "id": 3,
@@ -34,7 +34,7 @@ months_db = [
         "impact": 3,
         "description": "Завязываются плоды. Без влаги дерево сбрасывает лишнюю завязь.",
         "image_url": "/static/img/june.jpg",
-        "video_url": "/static/video/june.mp4",
+        "video_url": "/static/img/june.mp4",
     },
     {
         "id": 4,
@@ -46,7 +46,7 @@ months_db = [
         "impact": 2,
         "description": "Плоды набирают массу. Засуха и жара замедляют их рост.",
         "image_url": "/static/img/july.jpg",
-        "video_url": "/static/video/july.mp4",
+        "video_url": "/static/img/july.mp4",
     },
     {
         "id": 5,
@@ -58,7 +58,7 @@ months_db = [
         "impact": 2,
         "description": "Яблоки наливаются и краснеют. Затяжные дожди вредят созреванию.",
         "image_url": "/static/img/august.jpg",
-        "video_url": "/static/video/august.mp4",
+        "video_url": "/static/img/august.mp4",
     },
     {
         "id": 6,
@@ -70,6 +70,6 @@ months_db = [
         "impact": 2,
         "description": "Пора сбора урожая. Сухая погода помогает сохранить плоды.",
         "image_url": "/static/img/september.jpg",
-        "video_url": "/static/video/september.mp4",
+        "video_url": "/static/img/september.mp4",
     },
 ]

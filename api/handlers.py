@@ -29,6 +29,17 @@ def get_months_catalog(request: Request, temp_from: str = ""):
         context={"months": months, "temp": temp}
         )
 
+@router.get("/month/draft")
+def get_month_draft(request: Request):
+    draft = next((month for month in months_db if month["status"] == "draft"), None)
+    return templates.TemplateResponse(
+        request=request,
+        name="month_draft.html",
+        context={"draft": draft}
+    )
+
+
+
 @router.get("/month")
 @router.get("/month/{month_id}")
 def get_month_feed(request: Request, month_id: int | None = None, next_month: bool = Query(default=False, alias="next")):
@@ -53,31 +64,3 @@ def get_month_feed(request: Request, month_id: int | None = None, next_month: bo
         name="month_feed.html",
         context={"month": month}
     )
-    
-
-
-# @router.get("/hotel/{hotel_id}")
-# def get_hotel_detail(request: Request, hotel_id: int):
-#     hotel = next((h for h in hotels_db if h["id"] == hotel_id), None)
-    
-#     return templates.TemplateResponse(
-#         request=request,
-#         name="hotel.html", 
-#         context={"hotel": hotel}
-#     )
-
-# from fastapi import APIRouter, Request
-# from fastapi.templating import Jinja2Templates
-# from data.collections import hotels_db
-
-# router = APIRouter()
-# templates = Jinja2Templates(directory="templates")
-
-# @router.get("/")
-# def get_catalog(request: Request):
-#     # Добавляем context явно
-#     return templates.TemplateResponse(
-#         request=request,
-#         name="index.html", 
-#         context={"hotels": hotels_db}
-#     )

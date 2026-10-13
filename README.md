@@ -1,0 +1,1 @@
+BMSTU System Design + Web. Development of a service to calculate the yield of an apple orchard for the specified climatic conditions during the season.

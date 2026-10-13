@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ month.title }} — лента</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/months.css">
+</head>
+<body>
+<div class="screen">
+    <main class="content content--feed">
+        <!-- Вертикальное видео 9:16 на весь экран; poster — фото месяца, пока видео грузится -->
+        <video class="feed__video" src="{{ month.video_url }}" poster="{{ month.image_url }}"
+               autoplay loop muted playsinline></video>
+        <div class="feed__shade"></div>
+
+        <!-- Слева внизу: название, температура и осадки, фаза, описание в 2 строки + «Ещё» -->
+        <div class="feed__info">
+            <h1 class="feed__title">{{ month.title }}</h1>
+            <div class="feed__params">
+                <span class="param">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+                    {{ "%+d"|format(month.norm_temp) }} °C
+                </span>
+                <span class="param">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+                    {{ month.norm_precip }} мм
+                </span>
+            </div>
+            <span class="badge badge--feed">{{ month.phase }}</span>
+
+            <input class="more-toggle" type="checkbox" id="more-feed">
+            <p class="more-text">{{ month.description }}</p>
+            <label class="more-btn" for="more-feed"></label>
+        </div>
+
+        <!-- Справа одной колонкой: лайки и переход к следующему месяцу -->
+        <div class="feed__side">
+            <div class="side-item side-item--like">
+                <span class="side-item__circle">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </span>
+                {{ month.likes_count }}
+            </div>
+            <a class="side-item side-item--next" href="/months/feed/{{ month.id }}?next=true" title="Следующий месяц">
+                <span class="side-item__circle">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                </span>
+            </a>
+        </div>
+    </main>
+
+    <nav class="tabbar">
+        <a class="tab {{ 'tab--active' if active_tab == 'feed' }}" href="/months/feed">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            Лента
+        </a>
+        <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+            Новый
+        </a>
+        <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Плитка
+        </a>
+    </nav>
+</div>
+</body>
+</html>

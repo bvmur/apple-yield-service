@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Месяцы — урожайность сада яблонь</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/months.css">
+</head>
+<body>
+<div class="screen">
+    <header class="topbar">
+        <h1 class="page-title">Урожайность сада яблонь</h1>
+        <p class="page-subtitle">Этапы сезона и климатические нормы месяцев</p>
+    </header>
+
+    <main class="content">
+
+        <!-- Фильтр по температуре: обычная GET-форма, без JavaScript -->
+        <form class="filter" method="get" action="/months">
+            <label class="filter__label" for="temp_from">
+                Температура от:
+                <span class="filter__value">{{ "%+d °C"|format(temp) if temp is not none else "любая" }}</span>
+            </label>
+            <input class="range" type="range" id="temp_from" name="temp_from"
+                   min="-10" max="25" step="1"
+                   value="{{ temp if temp is not none else -10 }}">
+            <div class="filter__scale"><span>−10 °C</span><span>+25 °C</span></div>
+            <div class="filter__buttons">
+                <a class="btn btn--outline" href="/months">Сбросить</a>
+                <button class="btn" type="submit">Показать</button>
+            </div>
+        </form>
+
+        {% if months %}
+        <ul class="grid">
+            {% for month in months %}
+            <li class="card">
+                <a class="card__link" href="/months/feed/{{ month.id }}">
+                    <img class="card__photo" src="{{ month.image_url }}" alt="{{ month.title }}">
+                    <h2 class="card__title">{{ month.title }}</h2>
+                </a>
+                <span class="badge">{{ month.phase }}</span>
+
+                <div class="params">
+                    <span class="param">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+                        {{ "%+d"|format(month.norm_temp) }} °C
+                    </span>
+                    <span class="param">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+                        {{ month.norm_precip }} мм
+                    </span>
+                    <span class="param param--like">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                        {{ month.likes_count }}
+                    </span>
+                </div>
+
+                <div class="impact">
+                    <span>Значимость</span>
+                    <span class="impact__dots">
+                        {% for level in range(1, 4) %}
+                        <span class="impact__dot {{ 'impact__dot--on' if level <= month.impact }}"></span>
+                        {% endfor %}
+                    </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty">Нет месяцев с такой температурой</p>
+        {% endif %}
+    </main>
+
+    <nav class="tabbar">
+        <a class="tab {{ 'tab--active' if active_tab == 'feed' }}" href="/months/feed">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            Лента
+        </a>
+        <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+            Новый
+        </a>
+        <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Плитка
+        </a>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,5 +1,7 @@
+from typing import Any
 
-months_db = [
+
+months_db: list[dict[str, Any]] = [
     {
         "id": 1,
         "title": "Апрель",
@@ -9,8 +11,10 @@ months_db = [
         "norm_precip": 40,         # климатическая норма, мм
         "impact": 1,               # значимость для урожая: 1 — низкая, 2 — средняя, 3 — высокая
         "description": "Сад просыпается: набухают почки. Поздний снег и заморозки ещё опасны.",
-        "image_url": "/static/img/april.jpg",
-        "video_url": "/static/img/april.mp4",
+        "image_url": "http://localhost:9000/media/april.jpg",
+        "video_url": "http://localhost:9000/media/april.mp4",
+        "status": "published",
+        "likes": [1, 4, 6, 7],
     },
     {
         "id": 2,
@@ -21,8 +25,10 @@ months_db = [
         "norm_precip": 55,
         "impact": 3,
         "description": "Время цветения и опыления. Главная угроза месяца — возвратные заморозки.",
-        "image_url": "/static/img/may.jpg",
-        "video_url": "/static/img/may.mp4",
+        "image_url": "http://localhost:9000/media/may.jpg",
+        "video_url": "http://localhost:9000/media/may.mp4",
+        "status": "published",
+        "likes": [5],
     },
     {
         "id": 3,
@@ -33,8 +39,10 @@ months_db = [
         "norm_precip": 80,
         "impact": 3,
         "description": "Завязываются плоды. Без влаги дерево сбрасывает лишнюю завязь.",
-        "image_url": "/static/img/june.jpg",
-        "video_url": "/static/img/june.mp4",
+        "image_url": "http://localhost:9000/media/june.jpg",
+        "video_url": "http://localhost:9000/media/june.mp4",
+        "status": "published",
+        "likes": [1, 5, 6],
     },
     {
         "id": 4,
@@ -45,8 +53,10 @@ months_db = [
         "norm_precip": 90,
         "impact": 2,
         "description": "Плоды набирают массу. Засуха и жара замедляют их рост.",
-        "image_url": "/static/img/july.jpg",
-        "video_url": "/static/img/july.mp4",
+        "image_url": "http://localhost:9000/media/july.jpg",
+        "video_url": "http://localhost:9000/media/july.mp4",
+        "status": "published",
+        "likes": [3, 4, 5],
     },
     {
         "id": 5,
@@ -57,8 +67,10 @@ months_db = [
         "norm_precip": 75,
         "impact": 2,
         "description": "Яблоки наливаются и краснеют. Затяжные дожди вредят созреванию.",
-        "image_url": "/static/img/august.jpg",
-        "video_url": "/static/img/august.mp4",
+        "image_url": "http://localhost:9000/media/august.jpg",
+        "video_url": "http://localhost:9000/media/august.mp4",
+        "status": "published",
+        "likes": [4, 6],
     },
     {
         "id": 6,
@@ -69,7 +81,37 @@ months_db = [
         "norm_precip": 65,
         "impact": 2,
         "description": "Пора сбора урожая. Сухая погода помогает сохранить плоды.",
-        "image_url": "/static/img/september.jpg",
-        "video_url": "/static/img/september.mp4",
+        "image_url": "http://localhost:9000/media/september.jpg",
+        "video_url": "http://localhost:9000/media/september.mp4",
+        "status": "published",
+        "likes": [1, 2, 3, 4, 5, 7],
+    },
+    {
+        "id": 7,
+        "title": "Октябрь",
+        "phase": "Листопад",
+        "season": "autumn",
+        "norm_temp": 5,
+        "norm_precip": 71,
+        "impact": 2,
+        "description": "Пора сбора урожая. Сухая погода помогает сохранить плоды.",
+        "image_url": "http://localhost:9000/media/september.jpg",
+        "video_url": "http://localhost:9000/media/september.mp4",
+        "status": "draft",
+        "likes": [1, 5, 7],
+    },
+    {
+        "id": 8,
+        "title": "Март",
+        "phase": "Начало сокодвижения",
+        "season": "spring",
+        "norm_temp": 3,
+        "norm_precip": 65,
+        "impact": 2,
+        "description": "Пора сбора урожая. Сухая погода помогает сохранить плоды.",
+        "image_url": "http://localhost:9000/media/september.jpg",
+        "video_url": "http://localhost:9000/media/september.mp4",
+        "status": "deleted",
+        "likes": [1],
     },
 ]

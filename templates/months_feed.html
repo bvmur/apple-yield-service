@@ -10,9 +10,13 @@
 <body>
 <div class="screen">
     <main class="content content--feed">
-        <!-- Вертикальное видео 9:16 на весь экран; poster — фото месяца, пока видео грузится -->
-        <video class="feed__video" src="{{ month.video_url }}" poster="{{ month.image_url }}"
-               autoplay loop muted playsinline></video>
+        <!-- Вертикальное видео 9:16 на весь экран; poster — фото месяца, пока видео грузится.
+             Если URL видео пустой или недоступен, браузер берёт следующий source — видео по умолчанию с SSR-сервера. -->
+        <video class="feed__video" poster="{{ month.image_url or '/static/media/default.jpg' }}"
+               autoplay loop muted playsinline>
+            {% if month.video_url %}<source src="{{ month.video_url }}">{% endif %}
+            <source src="/static/media/default.mp4" type="video/mp4">
+        </video>
         <div class="feed__shade"></div>
 
         <!-- Слева внизу: название, температура и осадки, фаза, описание в 2 строки + «Ещё» -->
@@ -28,7 +32,7 @@
                     {{ month.norm_precip }} мм
                 </span>
             </div>
-            <span class="badge badge--feed">{{ month.phase }}</span>
+            {% if month.phase %}<span class="badge badge--feed">{{ month.phase }}</span>{% endif %}
 
             <input class="more-toggle" type="checkbox" id="more-feed">
             <p class="more-text">{{ month.description }}</p>
@@ -58,7 +62,7 @@
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-            Новый
+            Добавить
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>

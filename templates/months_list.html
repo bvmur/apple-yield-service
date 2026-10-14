@@ -37,10 +37,17 @@
             {% for month, likes_count in months %}
             <li class="card">
                 <a class="card__link" href="/months/feed/{{ month.id }}">
-                    <img class="card__photo" src="{{ month.image_url }}" alt="{{ month.title }}">
+                    <!-- Если фото по URL недоступно или URL пустой, браузер покажет вложенную заглушку с SSR-сервера -->
+                    {% if month.image_url %}
+                    <object class="card__photo" data="{{ month.image_url }}" type="image/jpeg">
+                        <img class="card__photo" src="/static/media/default.jpg" alt="{{ month.title }}">
+                    </object>
+                    {% else %}
+                    <img class="card__photo" src="/static/media/default.jpg" alt="{{ month.title }}">
+                    {% endif %}
                     <h2 class="card__title">{{ month.title }}</h2>
                 </a>
-                <span class="badge">{{ month.phase }}</span>
+                {% if month.phase %}<span class="badge">{{ month.phase }}</span>{% endif %}
 
                 <div class="params">
                     <span class="param">
@@ -57,6 +64,7 @@
                     </span>
                 </div>
 
+                {% if month.impact %}
                 <div class="impact">
                     <span>Значимость</span>
                     <span class="impact__dots">
@@ -65,6 +73,14 @@
                         {% endfor %}
                     </span>
                 </div>
+                {% endif %}
+                <!-- Логическое удаление: POST, на сервере — SQL UPDATE через курсор, без ORM -->
+                <form class="card__delete" method="post" action="/months/{{ month.id }}/delete">
+                    <input type="hidden" name="temp_from" value="{{ temp if temp is not none else '' }}">
+                    <button class="icon-btn" type="submit" title="Удалить" aria-label="Удалить">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                    </button>
+                </form>
             </li>
             {% endfor %}
         </ul>
@@ -80,7 +96,7 @@
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-            Новый
+            Добавить
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>

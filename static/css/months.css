@@ -706,3 +706,90 @@ a {
 .form .field:last-child {
     margin-bottom: 0;
 }
+
+
+/* ---------- ЛР2: кнопки форм, удаление, фото по умолчанию ---------- */
+
+.btn--wide {
+    width: 100%;
+    margin-top: 14px;
+}
+
+/* Фото-заглушка внутри <object>; клик по фото уходит в ссылку карточки */
+object.card__photo,
+object.picker__preview {
+    pointer-events: none;
+}
+
+.card {
+    position: relative;
+}
+
+.card__delete {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    margin: 0;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.icon-btn:hover {
+    background: var(--orange);
+    color: var(--white);
+}
+
+.icon-btn .icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* Без JS: после выбора файла input становится :valid (он required) — показываем отметку */
+.picker:has(.picker__file:required:valid) {
+    border-style: solid;
+    border-color: var(--green);
+}
+
+.picker:has(.picker__file:required:valid) .picker__action {
+    font-size: 0;
+}
+
+.picker:has(.picker__file:required:valid) .picker__action::after {
+    content: "✓ Файл выбран";
+    font-size: 13px;
+    color: var(--green-dark);
+}
+
+
+
+/* Черновик: фото и видео уже сохранены, выбрать заново нельзя */
+.picker--saved {
+    border-style: solid;
+    cursor: default;
+}
+
+.picker--saved:hover {
+    border-color: var(--line);
+}
+
+.picker--saved .picker__hint {
+    margin-bottom: 0;
+    word-break: break-all;
+}
+
+.field__input[readonly] {
+    color: var(--muted);
+}

@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Новый месяц</title>
+    <title>Добавить месяц</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/months.css">
@@ -10,26 +10,24 @@
 <body>
 <div class="screen">
     <header class="topbar">
-        <h1 class="page-title">Новый месяц</h1>
+        <h1 class="page-title">Добавить месяц</h1>
         <p class="page-subtitle">
-            {% if draft %}Черновик сохранён — проверьте поля и продолжите{% else %}Заполните данные месяца{% endif %}
+            {% if draft %}Черновик сохранён — заполните описание и опубликуйте{% else %}Укажите название, фото и видео{% endif %}
         </p>
     </header>
 
     <main class="content">
 
-        <form>
-            <!-- Видео и фото: клик по блоку открывает выбор файла (label + скрытый input type=file) -->
+        {% if not draft %}
+        <!-- Черновика нет. Для создания: название, фото, видео и кнопка «Далее».
+             Без enctype файлы на сервер не передаются — браузер отправит только их имена,
+             они и запишутся в таблицу как неверные url. -->
+        <form method="post" action="/months/draft">
             <label class="picker">
-                <input class="picker__file" type="file" name="video" accept="video/*">
-                {% if draft %}
-                <video class="picker__preview picker__preview--video" src="{{ draft.video_url }}"
-                       poster="{{ draft.image_url }}" autoplay loop muted playsinline></video>
-                {% else %}
+                <input class="picker__file" type="file" name="video" accept="video/*" required>
                 <span class="picker__preview picker__preview--video">
                     <svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
                 </span>
-                {% endif %}
                 <span>
                     <span class="picker__title">Видео</span>
                     <span class="picker__hint">Вертикальное 9:16, MP4</span>
@@ -38,14 +36,10 @@
             </label>
 
             <label class="picker">
-                <input class="picker__file" type="file" name="photo" accept="image/*">
-                {% if draft %}
-                <img class="picker__preview picker__preview--photo" src="{{ draft.image_url }}" alt="{{ draft.title }}">
-                {% else %}
+                <input class="picker__file" type="file" name="photo" accept="image/*" required>
                 <span class="picker__preview picker__preview--photo">
                     <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></svg>
                 </span>
-                {% endif %}
                 <span>
                     <span class="picker__title">Фото карточки</span>
                     <span class="picker__hint">JPG или PNG</span>
@@ -53,49 +47,75 @@
                 </span>
             </label>
 
-            <!-- Только поля, которые нужно ввести -->
             <div class="form">
                 <label class="field">
                     <span class="field__label">Месяц</span>
-                    <input class="field__input" type="text" name="title"
-                           value="{{ draft.title if draft else '' }}" placeholder="Например, Октябрь">
+                    <input class="field__input" type="text" name="title" maxlength="30" required
+                           placeholder="Например, Октябрь">
+                </label>
+            </div>
+
+            <button class="btn btn--wide" type="submit">Далее</button>
+        </form>
+
+        {% else %}
+        <!-- Черновик есть: страница открывается с заполненными полями.
+             Для публикации: краткое описание, температура и осадки, кнопка «Опубликовать».
+             Фото и видео из url черновика; если url пустой или недоступен — по умолчанию с SSR-сервера. -->
+        <form method="post" action="/months/draft/publish">
+            <div class="picker picker--saved">
+                <video class="picker__preview picker__preview--video"
+                       poster="{{ draft.image_url or '/static/media/default.jpg' }}" autoplay loop muted playsinline>
+                    {% if draft.video_url %}<source src="{{ draft.video_url }}">{% endif %}
+                    <source src="/static/media/default.mp4" type="video/mp4">
+                </video>
+                <span>
+                    <span class="picker__title">Видео</span>
+                    <span class="picker__hint">{{ draft.video_url or "—" }}</span>
+                </span>
+            </div>
+
+            <div class="picker picker--saved">
+                {% if draft.image_url %}
+                <object class="picker__preview picker__preview--photo" data="{{ draft.image_url }}" type="image/jpeg">
+                    <img class="picker__preview picker__preview--photo" src="/static/media/default.jpg" alt="{{ draft.title }}">
+                </object>
+                {% else %}
+                <img class="picker__preview picker__preview--photo" src="/static/media/default.jpg" alt="{{ draft.title }}">
+                {% endif %}
+                <span>
+                    <span class="picker__title">Фото карточки</span>
+                    <span class="picker__hint">{{ draft.image_url or "—" }}</span>
+                </span>
+            </div>
+
+            <div class="form">
+                <label class="field">
+                    <span class="field__label">Месяц</span>
+                    <input class="field__input" type="text" value="{{ draft.title }}" readonly>
                 </label>
                 <label class="field">
-                    <span class="field__label">Фаза развития</span>
-                    <input class="field__input" type="text" name="phase"
-                           value="{{ draft.phase if draft else '' }}" placeholder="Например, Листопад">
+                    <span class="field__label">Краткое описание</span>
+                    <textarea class="field__input field__input--area" name="description" maxlength="500" required
+                              placeholder="Что происходит с деревом и главный риск месяца">{{ draft.description or '' }}</textarea>
                 </label>
                 <div class="field-row">
                     <label class="field">
                         <span class="field__label">Температура, °C</span>
-                        <input class="field__input" type="number" name="norm_temp"
-                               value="{{ draft.norm_temp if draft else '' }}">
+                        <input class="field__input" type="number" name="norm_temp" required
+                               value="{{ draft.norm_temp if draft.norm_temp is not none else '' }}">
                     </label>
                     <label class="field">
                         <span class="field__label">Осадки, мм</span>
-                        <input class="field__input" type="number" name="norm_precip" min="0"
-                               value="{{ draft.norm_precip if draft else '' }}">
+                        <input class="field__input" type="number" name="norm_precip" min="0" required
+                               value="{{ draft.norm_precip if draft.norm_precip is not none else '' }}">
                     </label>
                 </div>
-                <div class="field">
-                    <span class="field__label">Значимость для урожая</span>
-                    <div class="segments">
-                        {% for level, name in [(1, "Низкая"), (2, "Средняя"), (3, "Высокая")] %}
-                        <label class="segment">
-                            <input type="radio" name="impact" value="{{ level }}"
-                                   {{ "checked" if draft and draft.impact == level }}>
-                            <span>{{ name }}</span>
-                        </label>
-                        {% endfor %}
-                    </div>
-                </div>
-                <label class="field">
-                    <span class="field__label">Описание</span>
-                    <textarea class="field__input field__input--area" name="description"
-                              placeholder="Что происходит с деревом и главный риск месяца">{{ draft.description if draft else '' }}</textarea>
-                </label>
             </div>
+
+            <button class="btn btn--wide" type="submit">Опубликовать</button>
         </form>
+        {% endif %}
     </main>
 
     <nav class="tabbar">
@@ -105,7 +125,7 @@
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-            Новый
+            Добавить
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>

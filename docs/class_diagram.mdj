@@ -1,0 +1,1459 @@
+{
+ "_type": "Project",
+ "_id": "AAAAAAJ00000000000000001",
+ "name": "Урожайность сада яблонь",
+ "ownedElements": [
+  {
+   "_type": "UMLModel",
+   "_id": "AAAAAAJ00000000000000002",
+   "_parent": {
+    "$ref": "AAAAAAJ00000000000000001"
+   },
+   "name": "Модель системы",
+   "ownedElements": [
+    {
+     "_type": "UMLClassDiagram",
+     "_id": "AAAAAAJ00000000000000003",
+     "_parent": {
+      "$ref": "AAAAAAJ00000000000000002"
+     },
+     "name": "Диаграмма классов (ЛР3)",
+     "defaultDiagram": true,
+     "ownedViews": [
+      {
+       "_type": "UMLPackageView",
+       "_id": "AAAAAAJ00000000000000005",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000004"
+       },
+       "left": 30,
+       "top": 30,
+       "width": 1080,
+       "height": 240
+      },
+      {
+       "_type": "UMLPackageView",
+       "_id": "AAAAAAJ00000000000000007",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000006"
+       },
+       "left": 30,
+       "top": 410,
+       "width": 1080,
+       "height": 360
+      },
+      {
+       "_type": "UMLPackageView",
+       "_id": "AAAAAAJ00000000000000009",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000008"
+       },
+       "left": 30,
+       "top": 810,
+       "width": 1080,
+       "height": 410
+      },
+      {
+       "_type": "UMLPackageView",
+       "_id": "AAAAAAJ00000000000000011",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000010"
+       },
+       "left": 30,
+       "top": 1260,
+       "width": 1080,
+       "height": 190
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000013",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000012"
+       },
+       "left": 55,
+       "top": 95,
+       "width": 240,
+       "height": 140,
+       "autoResize": false
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000015",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000014"
+       },
+       "left": 318,
+       "top": 95,
+       "width": 240,
+       "height": 140,
+       "autoResize": false
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000017",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000016"
+       },
+       "left": 581,
+       "top": 95,
+       "width": 240,
+       "height": 140,
+       "autoResize": false
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000019",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000018"
+       },
+       "left": 844,
+       "top": 95,
+       "width": 240,
+       "height": 140,
+       "autoResize": false
+      },
+      {
+       "_type": "UMLInterfaceView",
+       "_id": "AAAAAAJ00000000000000021",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000020"
+       },
+       "left": 345,
+       "top": 315,
+       "width": 30,
+       "height": 30,
+       "autoResize": false,
+       "stereotypeDisplay": "icon"
+      },
+      {
+       "_type": "UMLInterfaceView",
+       "_id": "AAAAAAJ00000000000000023",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000022"
+       },
+       "left": 950,
+       "top": 315,
+       "width": 30,
+       "height": 30,
+       "autoResize": false,
+       "stereotypeDisplay": "icon"
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000043",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000024"
+       },
+       "left": 55,
+       "top": 470,
+       "width": 100,
+       "height": 40,
+       "autoResize": true
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000050",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000044"
+       },
+       "left": 600,
+       "top": 470,
+       "width": 100,
+       "height": 40,
+       "autoResize": true
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000065",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000051"
+       },
+       "left": 55,
+       "top": 870,
+       "width": 100,
+       "height": 40,
+       "autoResize": true
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000070",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000066"
+       },
+       "left": 450,
+       "top": 870,
+       "width": 100,
+       "height": 40,
+       "autoResize": true
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000076",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000071"
+       },
+       "left": 780,
+       "top": 870,
+       "width": 100,
+       "height": 40,
+       "autoResize": true
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000078",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000077"
+       },
+       "left": 70,
+       "top": 1325,
+       "width": 100,
+       "height": 40,
+       "autoResize": true,
+       "suppressAttributes": true,
+       "suppressOperations": true
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000080",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000079"
+       },
+       "left": 470,
+       "top": 1325,
+       "width": 100,
+       "height": 40,
+       "autoResize": true,
+       "suppressAttributes": true,
+       "suppressOperations": true
+      },
+      {
+       "_type": "UMLClassView",
+       "_id": "AAAAAAJ00000000000000082",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000081"
+       },
+       "left": 860,
+       "top": 1325,
+       "width": 100,
+       "height": 40,
+       "autoResize": true,
+       "suppressAttributes": true,
+       "suppressOperations": true
+      },
+      {
+       "_type": "UMLAssociationView",
+       "_id": "AAAAAAJ00000000000000086",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000083"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000021"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000013"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLAssociationView",
+       "_id": "AAAAAAJ00000000000000090",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000087"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000021"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000015"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLAssociationView",
+       "_id": "AAAAAAJ00000000000000094",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000091"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000021"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000017"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLAssociationView",
+       "_id": "AAAAAAJ00000000000000098",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000095"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000023"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000019"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLInterfaceRealizationView",
+       "_id": "AAAAAAJ00000000000000100",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000099"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000021"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000043"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLInterfaceRealizationView",
+       "_id": "AAAAAAJ00000000000000102",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000101"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000023"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000050"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLDependencyView",
+       "_id": "AAAAAAJ00000000000000104",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000103"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000065"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000043"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLDependencyView",
+       "_id": "AAAAAAJ00000000000000106",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000105"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000070"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000043"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLDependencyView",
+       "_id": "AAAAAAJ00000000000000108",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000107"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000076"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000050"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLDependencyView",
+       "_id": "AAAAAAJ00000000000000110",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000109"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000078"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000065"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLDependencyView",
+       "_id": "AAAAAAJ00000000000000112",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000111"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000080"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000070"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLDependencyView",
+       "_id": "AAAAAAJ00000000000000114",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000113"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000082"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000076"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLAssociationView",
+       "_id": "AAAAAAJ00000000000000118",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000115"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000080"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000078"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLAssociationView",
+       "_id": "AAAAAAJ00000000000000122",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000119"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000082"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000080"
+       },
+       "lineStyle": 1,
+       "points": "0:0;10:10"
+      },
+      {
+       "_type": "UMLAssociationView",
+       "_id": "AAAAAAJ00000000000000126",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000003"
+       },
+       "model": {
+        "$ref": "AAAAAAJ00000000000000123"
+       },
+       "head": {
+        "$ref": "AAAAAAJ00000000000000082"
+       },
+       "tail": {
+        "$ref": "AAAAAAJ00000000000000078"
+       },
+       "lineStyle": 0,
+       "points": "110:1345;110:1415;900:1415;900:1345"
+      }
+     ]
+    },
+    {
+     "_type": "UMLPackage",
+     "_id": "AAAAAAJ00000000000000004",
+     "_parent": {
+      "$ref": "AAAAAAJ00000000000000002"
+     },
+     "name": "React приложение",
+     "ownedElements": [
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000012",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000004"
+       },
+       "name": "Страница Плитка месяцев",
+       "ownedElements": [
+        {
+         "_type": "UMLAssociation",
+         "_id": "AAAAAAJ00000000000000083",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000012"
+         },
+         "end1": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000084",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000083"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000012"
+          }
+         },
+         "end2": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000085",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000083"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000020"
+          }
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": []
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000014",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000004"
+       },
+       "name": "Страница Лента месяца",
+       "ownedElements": [
+        {
+         "_type": "UMLAssociation",
+         "_id": "AAAAAAJ00000000000000087",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000014"
+         },
+         "end1": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000088",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000087"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000014"
+          }
+         },
+         "end2": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000089",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000087"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000020"
+          }
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": []
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000016",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000004"
+       },
+       "name": "Страница Добавление месяца",
+       "ownedElements": [
+        {
+         "_type": "UMLAssociation",
+         "_id": "AAAAAAJ00000000000000091",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000016"
+         },
+         "end1": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000092",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000091"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000016"
+          }
+         },
+         "end2": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000093",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000091"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000020"
+          }
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": []
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000018",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000004"
+       },
+       "name": "Страница Вход пользователя",
+       "ownedElements": [
+        {
+         "_type": "UMLAssociation",
+         "_id": "AAAAAAJ00000000000000095",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000018"
+         },
+         "end1": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000096",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000095"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000018"
+          }
+         },
+         "end2": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000097",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000095"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000022"
+          }
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": []
+      }
+     ]
+    },
+    {
+     "_type": "UMLPackage",
+     "_id": "AAAAAAJ00000000000000006",
+     "_parent": {
+      "$ref": "AAAAAAJ00000000000000002"
+     },
+     "name": "Веб-сервис",
+     "ownedElements": [
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000024",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000006"
+       },
+       "name": "Домен /api/months",
+       "ownedElements": [
+        {
+         "_type": "UMLInterfaceRealization",
+         "_id": "AAAAAAJ00000000000000099",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000020"
+         }
+        },
+        {
+         "_type": "UMLDependency",
+         "_id": "AAAAAAJ00000000000000103",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000051"
+         }
+        },
+        {
+         "_type": "UMLDependency",
+         "_id": "AAAAAAJ00000000000000105",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000066"
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": [
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000025",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "name": "GET СписокМесяцев",
+         "parameters": [
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000026",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000025"
+           },
+           "name": "temp_from"
+          },
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000027",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000025"
+           },
+           "name": "title"
+          }
+         ]
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000028",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "name": "GET ЛентаМесяцев",
+         "parameters": [
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000029",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000028"
+           },
+           "name": "id"
+          },
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000030",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000028"
+           },
+           "name": "next"
+          }
+         ]
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000031",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "name": "GET ЧерновикМесяца"
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000032",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "name": "POST Месяц",
+         "parameters": [
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000033",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000032"
+           },
+           "name": "title"
+          },
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000034",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000032"
+           },
+           "name": "image"
+          },
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000035",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000032"
+           },
+           "name": "video"
+          }
+         ]
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000036",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "name": "PUT ОпубликоватьМесяц",
+         "parameters": [
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000037",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000036"
+           },
+           "name": "id"
+          }
+         ]
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000038",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "name": "DELETE Месяц",
+         "parameters": [
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000039",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000038"
+           },
+           "name": "id"
+          }
+         ]
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000040",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000024"
+         },
+         "name": "POST ЛайкМесяца",
+         "parameters": [
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000041",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000040"
+           },
+           "name": "id"
+          },
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000042",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000040"
+           },
+           "name": "value"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000044",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000006"
+       },
+       "name": "Домен /api/users",
+       "ownedElements": [
+        {
+         "_type": "UMLInterfaceRealization",
+         "_id": "AAAAAAJ00000000000000101",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000044"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000044"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000022"
+         }
+        },
+        {
+         "_type": "UMLDependency",
+         "_id": "AAAAAAJ00000000000000107",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000044"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000044"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000071"
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": [
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000045",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000044"
+         },
+         "name": "POST РегистрацияПользователя",
+         "parameters": [
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000046",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000045"
+           },
+           "name": "username"
+          },
+          {
+           "_type": "UMLParameter",
+           "_id": "AAAAAAJ00000000000000047",
+           "_parent": {
+            "$ref": "AAAAAAJ00000000000000045"
+           },
+           "name": "password"
+          }
+         ]
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000048",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000044"
+         },
+         "name": "POST ВходПользователя"
+        },
+        {
+         "_type": "UMLOperation",
+         "_id": "AAAAAAJ00000000000000049",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000044"
+         },
+         "name": "POST ВыходПользователя"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_type": "UMLPackage",
+     "_id": "AAAAAAJ00000000000000008",
+     "_parent": {
+      "$ref": "AAAAAAJ00000000000000002"
+     },
+     "name": "Модель",
+     "ownedElements": [
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000051",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000008"
+       },
+       "name": "Month",
+       "ownedElements": [
+        {
+         "_type": "UMLDependency",
+         "_id": "AAAAAAJ00000000000000109",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000077"
+         }
+        }
+       ],
+       "attributes": [
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000052",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "id",
+         "type": "int"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000053",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "title",
+         "type": "str"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000054",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "phase",
+         "type": "str | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000055",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "description",
+         "type": "str | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000056",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "norm_temp",
+         "type": "int | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000057",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "norm_precip",
+         "type": "int | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000058",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "impact",
+         "type": "int | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000059",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "image_url",
+         "type": "str | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000060",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "video_url",
+         "type": "str | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000061",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "status",
+         "type": "str"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000062",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "created_at",
+         "type": "datetime"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000063",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "formed_at",
+         "type": "datetime | None"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000064",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000051"
+         },
+         "name": "creator_id",
+         "type": "int"
+        }
+       ],
+       "operations": []
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000066",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000008"
+       },
+       "name": "MonthLike",
+       "ownedElements": [
+        {
+         "_type": "UMLDependency",
+         "_id": "AAAAAAJ00000000000000111",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000066"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000066"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000079"
+         }
+        }
+       ],
+       "attributes": [
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000067",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000066"
+         },
+         "name": "id",
+         "type": "int"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000068",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000066"
+         },
+         "name": "user_id",
+         "type": "int"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000069",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000066"
+         },
+         "name": "month_id",
+         "type": "int"
+        }
+       ],
+       "operations": []
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000071",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000008"
+       },
+       "name": "User",
+       "ownedElements": [
+        {
+         "_type": "UMLDependency",
+         "_id": "AAAAAAJ00000000000000113",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000071"
+         },
+         "source": {
+          "$ref": "AAAAAAJ00000000000000071"
+         },
+         "target": {
+          "$ref": "AAAAAAJ00000000000000081"
+         }
+        }
+       ],
+       "attributes": [
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000072",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000071"
+         },
+         "name": "id",
+         "type": "int"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000073",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000071"
+         },
+         "name": "username",
+         "type": "str"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000074",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000071"
+         },
+         "name": "password_hash",
+         "type": "str"
+        },
+        {
+         "_type": "UMLAttribute",
+         "_id": "AAAAAAJ00000000000000075",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000071"
+         },
+         "name": "is_moderator",
+         "type": "bool"
+        }
+       ],
+       "operations": []
+      }
+     ]
+    },
+    {
+     "_type": "UMLPackage",
+     "_id": "AAAAAAJ00000000000000010",
+     "_parent": {
+      "$ref": "AAAAAAJ00000000000000002"
+     },
+     "name": "База данных",
+     "ownedElements": [
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000077",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000010"
+       },
+       "name": "months",
+       "ownedElements": [
+        {
+         "_type": "UMLAssociation",
+         "_id": "AAAAAAJ00000000000000115",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000077"
+         },
+         "end1": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000116",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000115"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000077"
+          },
+          "multiplicity": "1"
+         },
+         "end2": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000117",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000115"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000079"
+          },
+          "multiplicity": "0..*"
+         }
+        },
+        {
+         "_type": "UMLAssociation",
+         "_id": "AAAAAAJ00000000000000123",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000077"
+         },
+         "end1": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000124",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000123"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000077"
+          },
+          "multiplicity": "0..*"
+         },
+         "end2": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000125",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000123"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000081"
+          },
+          "multiplicity": "1"
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": []
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000079",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000010"
+       },
+       "name": "month_likes",
+       "ownedElements": [
+        {
+         "_type": "UMLAssociation",
+         "_id": "AAAAAAJ00000000000000119",
+         "_parent": {
+          "$ref": "AAAAAAJ00000000000000079"
+         },
+         "end1": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000120",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000119"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000079"
+          },
+          "multiplicity": "0..*"
+         },
+         "end2": {
+          "_type": "UMLAssociationEnd",
+          "_id": "AAAAAAJ00000000000000121",
+          "_parent": {
+           "$ref": "AAAAAAJ00000000000000119"
+          },
+          "reference": {
+           "$ref": "AAAAAAJ00000000000000081"
+          },
+          "multiplicity": "1"
+         }
+        }
+       ],
+       "attributes": [],
+       "operations": []
+      },
+      {
+       "_type": "UMLClass",
+       "_id": "AAAAAAJ00000000000000081",
+       "_parent": {
+        "$ref": "AAAAAAJ00000000000000010"
+       },
+       "name": "users",
+       "ownedElements": [],
+       "attributes": [],
+       "operations": []
+      }
+     ]
+    },
+    {
+     "_type": "UMLInterface",
+     "_id": "AAAAAAJ00000000000000020",
+     "_parent": {
+      "$ref": "AAAAAAJ00000000000000002"
+     },
+     "name": "API Месяцы сада",
+     "ownedElements": [],
+     "attributes": [],
+     "operations": []
+    },
+    {
+     "_type": "UMLInterface",
+     "_id": "AAAAAAJ00000000000000022",
+     "_parent": {
+      "$ref": "AAAAAAJ00000000000000002"
+     },
+     "name": "API Пользователи сада",
+     "ownedElements": [],
+     "attributes": [],
+     "operations": []
+    }
+   ]
+  }
+ ]
+}

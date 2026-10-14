@@ -112,7 +112,6 @@ async def get_months_feed(
 
     row = (await db.execute(stmt)).first()
 
-    # Дошли до последнего опубликованного — начинаем ленту сначала
     if row is None and next_month:
         row = (await db.execute(first_stmt)).first()
 

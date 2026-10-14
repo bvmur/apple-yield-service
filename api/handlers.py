@@ -60,32 +60,44 @@ def get_months_draft(request: Request):
     )
 
 
-# 3. Лента: без id — первый месяц, с id — этот месяц, ?next=true — следующий по кругу
+# 3. Лента: без id — первый месяц, с id — этот месяц, ?next=true — следующий по кругу.
+#    Нужный месяц выбирает сама БД: каждый запрос возвращает ровно одну строку.
 @router.get("/months/feed")
 @router.get("/months/feed/{month_id}")
-def get_months_feed(
+async def get_months_feed(
     request: Request,
     month_id: int | None = None,
     next_month: bool = Query(default=False, alias="next"),
+    db: AsyncSession = Depends(get_db),
 ):
-    published = [month for month in months_db if month["status"] == "published"]
+    likes_count = func.count(MonthLike.id).label("likes_count")
+    base = (
+        select(Month, likes_count)
+        .outerjoin(MonthLike, Month.id == MonthLike.month_id)
+        .where(Month.status == "published")
+        .group_by(Month.id)
+    )
+    first_stmt = base.order_by(Month.id).limit(1)
 
-    index: int | None
     if month_id is None:
-        index = 0
+        stmt = first_stmt
+    elif next_month:
+        stmt = base.where(Month.id > month_id).order_by(Month.id).limit(1)
     else:
-        index = next((i for i, m in enumerate(published) if m["id"] == month_id), None)
-        if index is None:
-            raise HTTPException(status_code=404, detail="Месяц не найден.")
+        stmt = base.where(Month.id == month_id)
 
-    if next_month:
-        index = (index + 1) % len(published)
+    row = (await db.execute(stmt)).first()
 
-    month = published[index]
-    month = {**month, "likes_count": len(month["likes"])}
+    # Дошли до последнего опубликованного — начинаем ленту сначала
+    if row is None and next_month:
+        row = (await db.execute(first_stmt)).first()
 
+    if row is None:
+        raise HTTPException(status_code=404, detail="Месяц не найден.")
+
+    month, likes = row
     return templates.TemplateResponse(
         request=request,
         name="months_feed.html",
-        context={"month": month, "active_tab": "feed"},
+        context={"month": month, "likes_count": likes, "active_tab": "feed"},
     )

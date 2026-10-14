@@ -1,6 +1,13 @@
-from fastapi import APIRouter, Request, HTTPException, Query
+from fastapi import APIRouter, Request, HTTPException, Query, Depends
 from fastapi.templating import Jinja2Templates
 from data.collections import months_db
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+
+from db.session import get_db
+from models.month import Month
+from models.month_like import MonthLike
 
 router = APIRouter()
 
@@ -10,7 +17,9 @@ templates = Jinja2Templates(directory="templates")
 # 1. Плитка: список опубликованных месяцев + фильтр по температуре
 @router.get("/")
 @router.get("/months")
-def get_months_list(request: Request, temp_from: str = ""):
+async def get_months_list(request: Request,
+                          temp_from: str = "",
+                          db: AsyncSession = Depends(get_db)):
     temp = None
     if temp_from != "":
         try:
@@ -18,12 +27,20 @@ def get_months_list(request: Request, temp_from: str = ""):
         except ValueError:
             temp = None
 
-    months = [
-        {**month, "likes_count": len(month["likes"])}
-        for month in months_db
-        if month["status"] == "published" and (temp is None or month["norm_temp"] >= temp)
-    ]
-
+    likes_count = func.count(MonthLike.id).label("likes_count")
+    stmt = (
+        select(Month, likes_count)
+        .outerjoin(MonthLike, Month.id == MonthLike.month_id)
+        .where(Month.status == "published")
+        .group_by(Month.id)
+        .order_by(Month.id)
+    )
+    
+    if temp is not None:
+        stmt = stmt.where(Month.norm_temp >= temp)
+        
+    result = await db.execute(stmt)
+    months = result.all()
     return templates.TemplateResponse(
         request=request,
         name="months_list.html",

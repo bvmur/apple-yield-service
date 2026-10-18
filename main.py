@@ -3,11 +3,7 @@ import uvicorn
 from api.handlers import router
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI(title="draft-apple")
-
-# @app.get("/")
-# def read_root():
-#     return {"message": "Hello, World!"}
+app = FastAPI(title="months")
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(router)

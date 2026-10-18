@@ -5,10 +5,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 1,
         "title": "Апрель",
-        "phase": "Набухание почек",
         "norm_temp": 6,            # климатическая норма, °C
         "norm_precip": 40,         # климатическая норма, мм
-        "impact": 1,               # значимость для урожая: 1 — низкая, 2 — средняя, 3 — высокая
         "description": "Почки набухают и раскрываются, появляются первые листья. Распустившиеся почки повреждаются уже при −3…−4 °C, поэтому поздние заморозки опасны. От тепла и влаги апреля зависит, насколько дружно начнётся сезон.",
         "image_url": "http://localhost:9000/media/april.jpg",
         "video_url": "http://localhost:9000/media/april.mp4",
@@ -18,10 +16,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 2,
         "title": "Май",
-        "phase": "Цветение",
         "norm_temp": 13,
         "norm_precip": 55,
-        "impact": 3,
         "description": "Яблоня цветёт, пчёлы опыляют цветки — от этого зависит количество будущих плодов. Самый уязвимый момент сезона: заморозок до −2 °C губит раскрытые цветки. Холодная дождливая погода мешает пчёлам и снижает опыление.",
         "image_url": "http://localhost:9000/media/may.jpg",
         "video_url": "http://localhost:9000/media/may.mp4",
@@ -31,10 +27,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 3,
         "title": "Июнь",
-        "phase": "Завязь плодов",
         "norm_temp": 17,
         "norm_precip": 80,
-        "impact": 3,
         "description": "Отцветшие цветки превращаются в завязь — маленькие будущие яблоки. Дерево само сбрасывает лишние плоды, это называют июньским осыпанием. При засухе осыпание сильнее, поэтому в июне саду особенно нужна влага.",
         "image_url": "http://localhost:9000/media/june.jpg",
         "video_url": "http://localhost:9000/media/june.mp4",
@@ -44,10 +38,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 4,
         "title": "Июль",
-        "phase": "Рост плодов",
         "norm_temp": 19,
         "norm_precip": 90,
-        "impact": 2,
         "description": "Плоды быстро набирают массу, а на ветках закладываются цветковые почки следующего года. Дереву нужны тепло и регулярная влага. Засуха и жара мельчат плоды и снижают урожай не только этого, но и будущего сезона.",
         "image_url": "http://localhost:9000/media/july.jpg",
         "video_url": "http://localhost:9000/media/july.mp4",
@@ -57,10 +49,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 5,
         "title": "Август",
-        "phase": "Созревание",
         "norm_temp": 17,
         "norm_precip": 75,
-        "impact": 2,
         "description": "Яблоки наливаются и окрашиваются, летние сорта уже собирают. Тёплые дни и прохладные ночи улучшают окраску и вкус плодов. Затяжные дожди вызывают растрескивание яблок и развитие парши.",
         "image_url": "http://localhost:9000/media/august.jpg",
         "video_url": "http://localhost:9000/media/august.mp4",
@@ -70,10 +60,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 6,
         "title": "Сентябрь",
-        "phase": "Сбор урожая",
         "norm_temp": 11,
         "norm_precip": 65,
-        "impact": 2,
         "description": "Основной сбор осенних и зимних сортов. Сухая погода помогает собрать плоды без повреждений и дольше их хранить. Ранние заморозки опасны для яблок, которые ещё не сняты с дерева.",
         "image_url": "http://localhost:9000/media/september.jpg",
         "video_url": "http://localhost:9000/media/september.mp4",
@@ -83,10 +71,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 7,
         "title": "Октябрь",
-        "phase": "Листопад",
         "norm_temp": 5,
         "norm_precip": 71,
-        "impact": 2,
         "description": "Листья желтеют и опадают, дерево переходит к зимнему покою. Корни ещё продолжают расти, поэтому осенью проводят обильный влагозарядковый полив. Хорошо увлажнённая почва промерзает меньше и помогает саду перезимовать.",
         "image_url": "http://localhost:9000/media/october.jpeg",
         "video_url": "http://localhost:9000/media/october.mp4",
@@ -96,10 +82,8 @@ months_db: list[dict[str, Any]] = [
     {
         "id": 8,
         "title": "Март",
-        "phase": "Начало сокодвижения",
         "norm_temp": 3,
         "norm_precip": 65,
-        "impact": 2,
         "description": "Дни становятся длиннее, в древесине начинается движение соков. Перепады от плюса днём к минусу ночью повреждают кору. Это время ранней обрезки — до того, как раскроются почки.",
         "image_url": "http://localhost:9000/media/march.jpeg",
         "video_url": "http://localhost:9000/media/march.mp4",

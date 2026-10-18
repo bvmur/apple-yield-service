@@ -40,7 +40,6 @@
                     <img class="card__photo" src="{{ month.image_url }}" alt="{{ month.title }}">
                     <h2 class="card__title">{{ month.title }}</h2>
                 </a>
-                <span class="badge">{{ month.phase }}</span>
 
                 <div class="params">
                     <span class="param">
@@ -57,14 +56,6 @@
                     </span>
                 </div>
 
-                <div class="impact">
-                    <span>Значимость</span>
-                    <span class="impact__dots">
-                        {% for level in range(1, 4) %}
-                        <span class="impact__dot {{ 'impact__dot--on' if level <= month.impact }}"></span>
-                        {% endfor %}
-                    </span>
-                </div>
             </li>
             {% endfor %}
         </ul>

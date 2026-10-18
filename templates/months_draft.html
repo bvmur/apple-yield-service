@@ -60,11 +60,6 @@
                     <input class="field__input" type="text" name="title"
                            value="{{ draft.title if draft else '' }}" placeholder="Например, Октябрь">
                 </label>
-                <label class="field">
-                    <span class="field__label">Фаза развития</span>
-                    <input class="field__input" type="text" name="phase"
-                           value="{{ draft.phase if draft else '' }}" placeholder="Например, Листопад">
-                </label>
                 <div class="field-row">
                     <label class="field">
                         <span class="field__label">Температура, °C</span>
@@ -76,18 +71,6 @@
                         <input class="field__input" type="number" name="norm_precip" min="0"
                                value="{{ draft.norm_precip if draft else '' }}">
                     </label>
-                </div>
-                <div class="field">
-                    <span class="field__label">Значимость для урожая</span>
-                    <div class="segments">
-                        {% for level, name in [(1, "Низкая"), (2, "Средняя"), (3, "Высокая")] %}
-                        <label class="segment">
-                            <input type="radio" name="impact" value="{{ level }}"
-                                   {{ "checked" if draft and draft.impact == level }}>
-                            <span>{{ name }}</span>
-                        </label>
-                        {% endfor %}
-                    </div>
                 </div>
                 <label class="field">
                     <span class="field__label">Описание</span>
@@ -105,7 +88,7 @@
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-            Новый
+            Добавить
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>

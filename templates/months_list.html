@@ -5,7 +5,7 @@
     <title>Месяцы — урожайность сада яблонь</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/months.css">
+    <link rel="stylesheet" href="/static/css/months.css?v=3">
 </head>
 <body>
 <div class="screen">
@@ -37,9 +37,20 @@
             {% for month, likes_count in months %}
             <li class="card">
                 <a class="card__link" href="/months/feed/{{ month.id }}">
-                    <img class="card__photo" src="{{ month.image_url }}" alt="{{ month.title }}">
+                    <!-- Фото слоями CSS-фона: сначала url из БД, под ним фото по умолчанию.
+                         Если url пустой или файл недоступен — виден нижний слой (без JavaScript). -->
+                    <span class="card__photo media-fallback" role="img" aria-label="{{ month.title }}"
+                          style="background-image: {% if month.image_url %}url('{{ month.image_url }}'), {% endif %}url('/static/media/default.jpg')"></span>
                     <h2 class="card__title">{{ month.title }}</h2>
                 </a>
+
+                <!-- Удаление: POST-форма (мягкое удаление сырым SQL), фильтр передаётся скрытым полем -->
+                <form class="card__delete-form" method="post" action="/months/{{ month.id }}/delete">
+                    <input type="hidden" name="temp_from" value="{{ temp if temp is not none else '' }}">
+                    <button class="card__delete" type="submit" title="Удалить «{{ month.title }}»" aria-label="Удалить">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6M14 11v6"/></svg>
+                    </button>
+                </form>
 
                 <div class="params">
                     <span class="param">
@@ -52,7 +63,7 @@
                     </span>
                     <span class="param param--like">
                         <svg class="icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                        {{ likes_count }} 
+                        {{ likes_count }}
                     </span>
                 </div>
 
@@ -71,7 +82,7 @@
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-            Новый
+            Добавить
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>

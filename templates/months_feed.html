@@ -5,14 +5,19 @@
     <title>{{ month.title }} — лента</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/months.css">
+    <link rel="stylesheet" href="/static/css/months.css?v=3">
 </head>
 <body>
 <div class="screen">
     <main class="content content--feed">
-        <!-- Вертикальное видео 9:16 на весь экран; poster — фото месяца, пока видео грузится -->
-        <video class="feed__video" src="{{ month.video_url }}" poster="{{ month.image_url }}"
-               autoplay loop muted playsinline></video>
+        <!-- Вертикальное видео 9:16 на весь экран. Источники по очереди: url из БД, затем видео по умолчанию —
+             если первый недоступен, браузер сам берёт следующий. Фон — фото месяца (или по умолчанию), пока видео грузится. -->
+        <video class="feed__video media-fallback"
+               style="background-image: {% if month.image_url %}url('{{ month.image_url }}'), {% endif %}url('/static/media/default.jpg')"
+               autoplay loop muted playsinline>
+            {% if month.video_url %}<source src="{{ month.video_url }}">{% endif %}
+            <source src="/static/media/default.mp4" type="video/mp4">
+        </video>
         <div class="feed__shade"></div>
 
         <!-- Слева внизу: название и описание в 2 строки + «Ещё» -->
@@ -59,7 +64,7 @@
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'draft' }}" href="/months/draft">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-            Новый
+            Добавить
         </a>
         <a class="tab {{ 'tab--active' if active_tab == 'list' }}" href="/months">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>

@@ -1,7 +1,8 @@
+import uvicorn
 from fastapi import FastAPI
-import uvicorn  
-from api.handlers import router
 from fastapi.staticfiles import StaticFiles
+
+from api.handlers import router
 
 app = FastAPI(title="months")
 

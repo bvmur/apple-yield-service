@@ -269,6 +269,7 @@ a {
 }
 
 .card {
+    position: relative;
     padding: 10px 10px 12px;
     border-radius: 16px;
     background: var(--white);
@@ -279,8 +280,6 @@ a {
     width: 173px;
     height: 130px;
     border-radius: 12px;
-    object-fit: cover;
-    background: var(--field);
 }
 
 .card__title {
@@ -323,10 +322,6 @@ a {
     color: var(--orange-dark);
     font-weight: 700;
 }
-
-
-
-
 
 .empty {
     padding: 32px 16px;
@@ -421,10 +416,6 @@ a {
     font-weight: 800;
     line-height: 34px;
 }
-
-
-
-
 
 .feed__info .more-text {
     font-size: 14px;
@@ -626,12 +617,85 @@ a {
     width: 178px;
 }
 
-
-
-
-
-
-
 .form .field:last-child {
     margin-bottom: 0;
+}
+
+/* ---------- Фото и видео по умолчанию (без JavaScript) ----------
+   В background-image два слоя через запятую: url из БД и /static/media/default.jpg.
+   Если верхний слой не загрузился, браузер показывает нижний. */
+
+.media-fallback {
+    background-color: var(--field);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ---------- Плитка: кнопка «Удалить» ----------
+   Маленький круг в правом верхнем углу фото. Карточка — position: relative,
+   форма с кнопкой позиционируется относительно неё (10px отступ карточки + 6px от края фото). */
+
+.card__delete-form {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    margin: 0;
+}
+
+.card__delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.card__delete .icon {
+    width: 14px;
+    height: 14px;
+}
+
+.card__delete:hover {
+    background: var(--orange);
+    color: var(--white);
+}
+
+/* ---------- Новый месяц: состояния ---------- */
+
+/* Кнопки «Далее» и «Опубликовать» — на всю ширину белого блока формы (398px) */
+.btn--wide {
+    display: flex;
+    width: 398px;
+    height: 52px;
+    margin-top: 20px;
+    border-radius: 26px;
+    font-size: 15px;
+}
+
+/* Подпись под выбором файла: без JS меняется через :has и :valid
+   (required-поле type=file становится :valid, когда файл выбран) */
+.picker__action::after {
+    content: "Выбрать файл";
+}
+
+.picker:has(.picker__file:required:valid) {
+    border-style: solid;
+    border-color: var(--green);
+}
+
+.picker:has(.picker__file:required:valid) .picker__action::after {
+    content: "Файл выбран ✓";
+}
+
+/* Шаг 2: файлы уже есть, поэтому подпись — «Заменить файл» */
+.picker__action--change::after {
+    content: "Заменить файл";
 }

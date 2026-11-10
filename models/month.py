@@ -6,10 +6,9 @@ from sqlalchemy.orm import Mapped, mapped_column
 from db.base import Base
 
 
-
 class Month(Base):
     __tablename__ = "months"
-    
+
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(30))
     norm_temp: Mapped[int | None] = mapped_column(SmallInteger)
@@ -21,8 +20,7 @@ class Month(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     formed_at: Mapped[datetime | None] = mapped_column(DateTime)
     creator_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    
-    
+
     __table_args__ = (
         CheckConstraint("status IN ('draft', 'published', 'deleted')", name="ck_month_status"),
         Index("uq_months_one_draft_per_creator",
@@ -31,4 +29,3 @@ class Month(Base):
               postgresql_where=text("status = 'draft'"),
         ),
     )
-    

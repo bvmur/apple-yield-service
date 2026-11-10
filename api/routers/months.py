@@ -1,16 +1,25 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+from datetime import datetime
+from fastapi import APIRouter, Depends, HTTPException, Query, Form, File, UploadFile
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.session import get_db
 from models.month import Month
 from models.user import User
+from services.storage import upload
 
 from models.month_like import MonthLike
-from schemas.month import MonthListItem, MonthFeedItem
+from schemas.month import MonthListItem, MonthFeedItem, MonthDraft, MonthPublish, MonthLikeIn, MonthLikeResult
 from core.deps import get_current_user
 
 router = APIRouter(prefix="/api/months", tags=["months"])
+
+async def find_draft(db: AsyncSession, user: User) -> Month | None:
+    stmt = select(Month).where(
+        Month.creator_id == user.id,
+        Month.status == "draft",
+    )
+    return (await db.execute(stmt)).scalar_one_or_none()
 
 
 @router.get("", response_model=list[MonthListItem])
@@ -109,3 +118,124 @@ async def get_months_feed(month_id: int | None = None,
         "is_liked": 1 if liked else 0,
     }
     
+@router.get("/draft", response_model=MonthDraft)
+async def get_month_draft(
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    draft = await find_draft(db, user)
+    if draft is None:
+        raise HTTPException(status_code=404, detail="Черновика нет")
+    return draft
+
+
+@router.post("", response_model=MonthDraft, status_code=201)
+async def create_month(
+    title: str = Form(...),
+    photo: UploadFile = File(...),
+    video: UploadFile = File(...),
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    
+    title = title.strip()
+    
+    if await find_draft(db, user) is not None:
+        raise HTTPException(status_code=409, detail="Черновик уже существует")
+    
+    if title == "" or len(title) > 30:
+        raise HTTPException(status_code=400, detail="Название: от 1 до 30 символов")
+    
+    image_name = await upload(photo, "image")
+    video_name = await upload(video, "video")
+    
+    draft = Month(
+        title=title,
+        image_url=image_name,
+        video_url=video_name,
+        status="draft",
+        creator_id=user.id,
+    )
+    
+    db.add(draft)
+    await db.commit()
+    return draft
+
+@router.put("/draft/publish", response_model=MonthDraft)
+async def publish_month(
+    data: MonthPublish,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    
+    draft = await find_draft(db, user)
+    if draft is None:
+        raise HTTPException(status_code=404, detail="Черновик не найден")
+    
+    description = data.description.strip()
+    if description == "":
+        raise HTTPException(status_code=400, detail="Описание не может быть пустым")
+
+    draft.description = description
+    draft.norm_temp = data.norm_temp
+    draft.norm_precip = data.norm_precip
+    draft.status = "published"
+    draft.formed_at = datetime.now()
+    await db.commit()
+
+    return draft
+
+
+@router.delete("/{month_id}", status_code=204)
+async def delete_month(
+    month_id: int,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    month = await db.get(Month, month_id)
+    if month is None or month.status == "deleted":
+        raise HTTPException(status_code=404, detail="Месяц не найден")
+
+    # Удалять можно только свои месяцы
+    if month.creator_id != user.id:
+        raise HTTPException(status_code=403, detail="Можно удалить только свой месяц")
+
+    # Мягкое удаление: строка остаётся, меняется только статус
+    month.status = "deleted"
+    await db.commit()
+
+
+@router.post("/{month_id}/like", response_model=MonthLikeResult)
+async def like_month(
+    month_id: int,
+    data: MonthLikeIn,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    # Лайкать можно только опубликованные месяцы
+    month = await db.get(Month, month_id)
+    if month is None or month.status != "published":
+        raise HTTPException(status_code=404, detail="Месяц не найден")
+
+    like = await db.scalar(
+        select(MonthLike).where(
+            MonthLike.month_id == month_id,
+            MonthLike.user_id == user.id,
+        )
+    )
+
+    if data.value == 1 and like is None:
+        db.add(MonthLike(user_id=user.id, month_id=month_id))
+    elif data.value == 0 and like is not None:
+        await db.delete(like)
+    await db.commit()
+
+    likes = await db.scalar(
+        select(func.count(MonthLike.id)).where(MonthLike.month_id == month_id)
+    )
+
+    return {
+        "month_id": month_id,
+        "likes_count": likes,
+        "is_liked": data.value,
+    }

@@ -1,8 +1,20 @@
+# Виртуальное окружение
+my-webapp/
 venv/
+
+# Python
 __pycache__/
+*.pyc
+.mypy_cache/
+
+# Секреты
 .env
+
+# Редакторы и macOS
+.idea/
+.vscode/
 .DS_Store
-.DS_Store
+
+# Личное
 static/img
 draft.txt
-my-webapp/

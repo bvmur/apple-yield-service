@@ -27,13 +27,11 @@ async def get_months_list(temp_from: str = "",
                           db: AsyncSession = Depends(get_db),
                           user: User = Depends(get_current_user)):
     temp = None
-    
     if temp_from != "":
         try:
             temp = int(temp_from)
         except ValueError:
-            temp = None  # Игнорируем некорректное значение фильтра
-    
+            temp = None
     likes_count = func.count(MonthLike.id).label("likes_count")
     stmt = (
         select(Month, likes_count)
@@ -42,14 +40,13 @@ async def get_months_list(temp_from: str = "",
         .group_by(Month.id)
         .order_by(Month.id)
     )
-
+    
     if temp is not None:
         stmt = stmt.where(Month.norm_temp >= temp)
 
     result = await db.execute(stmt)
     months = result.all()
     response = []
-    
     for month, likes in months:
         response.append({
             "id": month.id,

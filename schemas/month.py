@@ -51,16 +51,17 @@ class MonthPublish(BaseModel):
     """Что клиент присылает при публикации. Системные поля сюда не входят."""
     model_config = ConfigDict(extra="forbid")
 
-    description: str = Field(min_length=1, max_length=1000)
-    norm_temp: int = Field(ge=-50, le=50)
-    norm_precip: int = Field(ge=0, le=1000)
+    description: str = Field(min_length=1, max_length=1000, description="Описание месяца",
+                             examples=["Листопад, подготовка сада к зиме"])
+    norm_temp: int = Field(ge=-50, le=50, description="Норма температуры, °C", examples=[2])
+    norm_precip: int = Field(ge=0, le=1000, description="Норма осадков, мм", examples=[50])
 
 
 class MonthLikeIn(BaseModel):
     """Что клиент присылает при лайке: 1 — поставить, 0 — снять."""
     model_config = ConfigDict(extra="forbid")
 
-    value: Literal[0, 1]
+    value: Literal[0, 1] = Field(description="1 — поставить лайк, 0 — снять", examples=[1])
 
 
 class MonthLikeResult(BaseModel):

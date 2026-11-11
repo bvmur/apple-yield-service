@@ -22,8 +22,14 @@ async def find_draft(db: AsyncSession, user: User) -> Month | None:
     return (await db.execute(stmt)).scalar_one_or_none()
 
 
-@router.get("", response_model=list[MonthListItem])
-async def get_months_list(temp_from: str = "",
+@router.get(
+    "",
+    response_model=list[MonthListItem],
+    summary="Список месяцев",
+    description="Опубликованные месяцы с числом лайков. Фильтр temp_from — норма температуры не ниже "
+                "заданной. Доступно без входа; is_mine = 1, если месяц создал текущий пользователь.",
+)
+async def get_months_list(temp_from: str = Query("", description="Температура от, °C (необязательно)"),
                           db: AsyncSession = Depends(get_db),
                           user: User | None = Depends(get_current_user_optional)):
     temp = None
@@ -61,8 +67,21 @@ async def get_months_list(temp_from: str = "",
     return response
 
 
-@router.get("/feed", response_model=MonthFeedItem)
-@router.get("/feed/{month_id}", response_model=MonthFeedItem)
+@router.get(
+    "/feed",
+    response_model=MonthFeedItem,
+    summary="Лента: первый месяц",
+    description="Первый опубликованный месяц — начало ленты. Доступно без входа; "
+                "is_liked = 1, если текущий пользователь лайкнул месяц.",
+)
+@router.get(
+    "/feed/{month_id}",
+    response_model=MonthFeedItem,
+    summary="Лента: месяц по id или следующий",
+    description="Без next — месяц с этим id. С next=true — следующий опубликованный после него, "
+                "после последнего снова первый. Доступно без входа.",
+    responses={404: {"description": "Месяц не найден"}},
+)
 async def get_months_feed(month_id: int | None = None,
                           next_month: bool = Query(default=False, alias="next"),
                             db: AsyncSession = Depends(get_db),
@@ -118,7 +137,13 @@ async def get_months_feed(month_id: int | None = None,
         "is_liked": 1 if liked else 0,
     }
     
-@router.get("/draft", response_model=MonthDraft)
+@router.get(
+    "/draft",
+    response_model=MonthDraft,
+    summary="Черновик",
+    description="Черновик текущего пользователя (не больше одного), id не указывается. Требуется вход.",
+    responses={401: {"description": "Требуется вход"}, 404: {"description": "Черновика нет"}},
+)
 async def get_month_draft(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
@@ -129,7 +154,19 @@ async def get_month_draft(
     return draft
 
 
-@router.post("", response_model=MonthDraft, status_code=201)
+@router.post(
+    "",
+    response_model=MonthDraft,
+    status_code=201,
+    summary="Создать месяц (черновик)",
+    description="Название, фото и видео в multipart/form-data. Файлы сохраняются в MinIO "
+                "под сгенерированными латинскими именами, создатель — текущий пользователь. Требуется вход.",
+    responses={
+        400: {"description": "Пустое название или неверный тип файла"},
+        401: {"description": "Требуется вход"},
+        409: {"description": "Черновик уже есть"},
+    },
+)
 async def create_month(
     title: str = Form(...),
     photo: UploadFile = File(...),
@@ -161,7 +198,18 @@ async def create_month(
     await db.commit()
     return draft
 
-@router.put("/draft/publish", response_model=MonthDraft)
+@router.put(
+    "/draft/publish",
+    response_model=MonthDraft,
+    summary="Опубликовать черновик",
+    description="Заполняет описание, температуру и осадки черновика и меняет статус на published. "
+                "Требуется вход.",
+    responses={
+        400: {"description": "Описание пустое"},
+        401: {"description": "Требуется вход"},
+        404: {"description": "Черновика нет"},
+    },
+)
 async def publish_month(
     data: MonthPublish,
     db: AsyncSession = Depends(get_db),
@@ -186,7 +234,17 @@ async def publish_month(
     return draft
 
 
-@router.delete("/{month_id}", status_code=204)
+@router.delete(
+    "/{month_id}",
+    status_code=204,
+    summary="Удалить месяц",
+    description="Мягкое удаление: статус меняется на deleted. Удалить можно только свой месяц. Требуется вход.",
+    responses={
+        401: {"description": "Требуется вход"},
+        403: {"description": "Чужой месяц"},
+        404: {"description": "Месяц не найден"},
+    },
+)
 async def delete_month(
     month_id: int,
     db: AsyncSession = Depends(get_db),
@@ -205,14 +263,20 @@ async def delete_month(
     await db.commit()
 
 
-@router.post("/{month_id}/like", response_model=MonthLikeResult)
+@router.post(
+    "/{month_id}/like",
+    response_model=MonthLikeResult,
+    summary="Лайк",
+    description="value = 1 ставит лайк от текущего пользователя, value = 0 снимает. "
+                "Только для опубликованных месяцев. Требуется вход.",
+    responses={401: {"description": "Требуется вход"}, 404: {"description": "Месяц не найден"}},
+)
 async def like_month(
     month_id: int,
     data: MonthLikeIn,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
-    # Лайкать можно только опубликованные месяцы
     month = await db.get(Month, month_id)
     if month is None or month.status != "published":
         raise HTTPException(status_code=404, detail="Месяц не найден")

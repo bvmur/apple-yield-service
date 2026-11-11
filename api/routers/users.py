@@ -13,7 +13,17 @@ from services.session import COOKIE_NAME, create_session, delete_session
 router = APIRouter(prefix="/api/users", tags=["users"])
 
 
-@router.post("/register", response_model=UserOut, status_code=201)
+@router.post(
+    "/register",
+    response_model=UserOut,
+    status_code=201,
+    summary="Регистрация",
+    description="Создаёт пользователя. Пароль хранится в виде хеша Argon2 и в ответ не возвращается.",
+    responses={
+        400: {"description": "Логин короче 3 символов"},
+        409: {"description": "Логин уже занят"},
+    },
+)
 async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
     username = data.username.strip()
     if len(username) < 3:
@@ -31,7 +41,12 @@ async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
     return new_user
 
 
-@router.post("/logout", status_code=204)
+@router.post(
+    "/logout",
+    status_code=204,
+    summary="Выход",
+    description="Удаляет сессию из Redis и стирает куку session_id.",
+)
 async def logout(
     response: Response,
     session_id: str | None = Security(cookie_scheme),
@@ -42,7 +57,14 @@ async def logout(
     response.delete_cookie(COOKIE_NAME)
 
 
-@router.post("/login", response_model=UserOut)
+@router.post(
+    "/login",
+    response_model=UserOut,
+    summary="Вход",
+    description="Проверяет логин и пароль, создаёт сессию в Redis и ставит куку session_id (HttpOnly). "
+                "После входа браузер сам отправляет куку, и методы создателя становятся доступны.",
+    responses={401: {"description": "Неверный логин или пароль"}},
+)
 async def login(
     data: UserLogin,
     response: Response,

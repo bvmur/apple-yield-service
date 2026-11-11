@@ -1,12 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from core.config import settings
 from core.deps import get_current_user
-from core.security import hash_password
+from core.security import hash_password, verify_password
 from db.session import get_db
 from models.user import User
-from schemas.user import UserOut, UserRegister
+from schemas.user import UserLogin, UserOut, UserRegister
+from services.session import COOKIE_NAME, create_session
 
 router = APIRouter(prefix="/api/users", tags=["users"])
 
@@ -29,13 +31,29 @@ async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
     return new_user
 
 
-@router.post("/login", response_model=UserOut)
-async def login(user: User = Depends(get_current_user)):
-    """Заглушка до ЛР4: всегда «входит» текущий пользователь из функции-singleton."""
-    return user
-
-
 @router.post("/logout", status_code=204)
 async def logout():
     """Заглушка до ЛР4: сессий и токенов пока нет, выходить не из чего."""
     return None
+
+
+@router.post("/login", response_model=UserOut)
+async def login(
+    data: UserLogin,
+    response: Response,
+    db: AsyncSession = Depends(get_db),
+):
+    """Аутентификация: проверить логин и пароль, создать сессию в Redis и поставить куку."""
+    user = await db.scalar(select(User).where(User.username == data.username))
+    if user is None or not verify_password(data.password, user.password):
+        raise HTTPException(status_code=401, detail="Неверный логин или пароль")
+
+    session_id = await create_session(user.id)
+    response.set_cookie(
+        key=COOKIE_NAME,
+        value=session_id,
+        httponly=True,
+        max_age=settings.SESSION_TTL,
+        samesite="lax",
+    )
+    return user

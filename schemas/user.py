@@ -8,6 +8,12 @@ class UserRegister(BaseModel):
     username: str = Field(min_length=3, max_length=30)
     password: str = Field(min_length=6, max_length=100)
 
+class UserLogin(BaseModel):
+    """Что присылает клиент при входе."""
+    model_config = ConfigDict(extra="forbid")
+
+    username: str
+    password: str
 
 class UserOut(BaseModel):
     """Пользователь в ответе. Пароля здесь нет — и не должно быть."""
@@ -15,3 +21,4 @@ class UserOut(BaseModel):
 
     id: int
     username: str
+    

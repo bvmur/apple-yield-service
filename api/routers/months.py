@@ -68,19 +68,19 @@ async def get_months_list(temp_from: str = Query("", description="Темпера
 
 
 @router.get(
-    "/feed",
-    response_model=MonthFeedItem,
-    summary="Лента: первый месяц",
-    description="Первый опубликованный месяц — начало ленты. Доступно без входа; "
-                "is_liked = 1, если текущий пользователь лайкнул месяц.",
-)
-@router.get(
     "/feed/{month_id}",
     response_model=MonthFeedItem,
     summary="Лента: месяц по id или следующий",
     description="Без next — месяц с этим id. С next=true — следующий опубликованный после него, "
                 "после последнего снова первый. Доступно без входа.",
     responses={404: {"description": "Месяц не найден"}},
+)
+@router.get(
+    "/feed",
+    response_model=MonthFeedItem,
+    summary="Лента: первый месяц",
+    description="Первый опубликованный месяц — начало ленты. Доступно без входа; "
+                "is_liked = 1, если текущий пользователь лайкнул месяц.",
 )
 async def get_months_feed(month_id: int | None = None,
                           next_month: bool = Query(default=False, alias="next"),

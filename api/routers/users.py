@@ -42,22 +42,6 @@ async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
 
 
 @router.post(
-    "/logout",
-    status_code=204,
-    summary="Выход",
-    description="Удаляет сессию из Redis и стирает куку session_id.",
-)
-async def logout(
-    response: Response,
-    session_id: str | None = Security(cookie_scheme),
-):
-    """Деавторизация: удалить сессию из Redis и стереть куку."""
-    if session_id is not None:
-        await delete_session(session_id)
-    response.delete_cookie(COOKIE_NAME)
-
-
-@router.post(
     "/login",
     response_model=UserOut,
     summary="Вход",
@@ -84,3 +68,19 @@ async def login(
         samesite="lax",
     )
     return user
+
+
+@router.post(
+    "/logout",
+    status_code=204,
+    summary="Выход",
+    description="Удаляет сессию из Redis и стирает куку session_id.",
+)
+async def logout(
+    response: Response,
+    session_id: str | None = Security(cookie_scheme),
+):
+    """Деавторизация: удалить сессию из Redis и стереть куку."""
+    if session_id is not None:
+        await delete_session(session_id)
+    response.delete_cookie(COOKIE_NAME)

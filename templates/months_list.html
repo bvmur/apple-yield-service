@@ -40,7 +40,7 @@
                     <!-- Фото слоями CSS-фона: сначала url из БД, под ним фото по умолчанию.
                          Если url пустой или файл недоступен — виден нижний слой (без JavaScript). -->
                     <span class="card__photo media-fallback" role="img" aria-label="{{ month.title }}"
-                          style="background-image: {% if month.image_url %}url('{{ month.image_url }}'), {% endif %}url('/static/media/default.jpg')"></span>
+                          style="background-image: {% if month.image_url %}url('{{ media_url(month.image_url) }}'), {% endif %}url('/static/media/default.jpg')"></span>
                     <h2 class="card__title">{{ month.title }}</h2>
                 </a>
 

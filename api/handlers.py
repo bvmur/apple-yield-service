@@ -12,10 +12,13 @@ from db.session import get_db
 from models.month import Month
 from models.user import User
 from models.month_like import MonthLike
+from services.storage import media_url
 
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
+# В БД хранятся имена файлов — полный адрес в MinIO собирает media_url (как в API)
+templates.env.globals["media_url"] = media_url
 
 # авторизации пока нет
 CURRENT_USER_ID = 1

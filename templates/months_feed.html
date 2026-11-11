@@ -13,9 +13,9 @@
         <!-- Вертикальное видео 9:16 на весь экран. Источники по очереди: url из БД, затем видео по умолчанию —
              если первый недоступен, браузер сам берёт следующий. Фон — фото месяца (или по умолчанию), пока видео грузится. -->
         <video class="feed__video media-fallback"
-               style="background-image: {% if month.image_url %}url('{{ month.image_url }}'), {% endif %}url('/static/media/default.jpg')"
+               style="background-image: {% if month.image_url %}url('{{ media_url(month.image_url) }}'), {% endif %}url('/static/media/default.jpg')"
                autoplay loop muted playsinline>
-            {% if month.video_url %}<source src="{{ month.video_url }}">{% endif %}
+            {% if month.video_url %}<source src="{{ media_url(month.video_url) }}">{% endif %}
             <source src="/static/media/default.mp4" type="video/mp4">
         </video>
         <div class="feed__shade"></div>

@@ -67,9 +67,9 @@
             <label class="picker">
                 <input class="picker__file" type="file" name="video" accept="video/*">
                 <video class="picker__preview picker__preview--video media-fallback"
-                       style="background-image: {% if draft.image_url %}url('{{ draft.image_url }}'), {% endif %}url('/static/media/default.jpg')"
+                       style="background-image: {% if draft.image_url %}url('{{ media_url(draft.image_url) }}'), {% endif %}url('/static/media/default.jpg')"
                        autoplay loop muted playsinline>
-                    {% if draft.video_url %}<source src="{{ draft.video_url }}">{% endif %}
+                    {% if draft.video_url %}<source src="{{ media_url(draft.video_url) }}">{% endif %}
                     <source src="/static/media/default.mp4" type="video/mp4">
                 </video>
                 <span>
@@ -82,7 +82,7 @@
             <label class="picker">
                 <input class="picker__file" type="file" name="photo" accept="image/*">
                 <span class="picker__preview picker__preview--photo media-fallback" role="img" aria-label="{{ draft.title }}"
-                      style="background-image: {% if draft.image_url %}url('{{ draft.image_url }}'), {% endif %}url('/static/media/default.jpg')"></span>
+                      style="background-image: {% if draft.image_url %}url('{{ media_url(draft.image_url) }}'), {% endif %}url('/static/media/default.jpg')"></span>
                 <span>
                     <span class="picker__title">Фото карточки</span>
                     <span class="picker__hint">JPG или PNG</span>

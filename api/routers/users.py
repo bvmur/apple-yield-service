@@ -1,14 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi import APIRouter, Depends, HTTPException, Response, Security
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.config import settings
-from core.deps import get_current_user
+from core.deps import cookie_scheme
 from core.security import hash_password, verify_password
 from db.session import get_db
 from models.user import User
 from schemas.user import UserLogin, UserOut, UserRegister
-from services.session import COOKIE_NAME, create_session
+from services.session import COOKIE_NAME, create_session, delete_session
 
 router = APIRouter(prefix="/api/users", tags=["users"])
 
@@ -32,9 +32,14 @@ async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/logout", status_code=204)
-async def logout():
-    """Заглушка до ЛР4: сессий и токенов пока нет, выходить не из чего."""
-    return None
+async def logout(
+    response: Response,
+    session_id: str | None = Security(cookie_scheme),
+):
+    """Деавторизация: удалить сессию из Redis и стереть куку."""
+    if session_id is not None:
+        await delete_session(session_id)
+    response.delete_cookie(COOKIE_NAME)
 
 
 @router.post("/login", response_model=UserOut)

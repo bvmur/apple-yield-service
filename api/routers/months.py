@@ -10,7 +10,7 @@ from services.storage import upload
 
 from models.month_like import MonthLike
 from schemas.month import MonthListItem, MonthFeedItem, MonthDraft, MonthPublish, MonthLikeIn, MonthLikeResult
-from core.deps import get_current_user
+from core.deps import get_current_user, get_current_user_optional
 
 router = APIRouter(prefix="/api/months", tags=["months"])
 
@@ -25,7 +25,7 @@ async def find_draft(db: AsyncSession, user: User) -> Month | None:
 @router.get("", response_model=list[MonthListItem])
 async def get_months_list(temp_from: str = "",
                           db: AsyncSession = Depends(get_db),
-                          user: User = Depends(get_current_user)):
+                          user: User | None = Depends(get_current_user_optional)):
     temp = None
     if temp_from != "":
         try:
@@ -55,7 +55,7 @@ async def get_months_list(temp_from: str = "",
             "norm_precip": month.norm_precip,
             "image_url": month.image_url,
             "likes_count": likes,
-            "is_mine": 1 if month.creator_id == user.id else 0,
+            "is_mine": 1 if user is not None and month.creator_id == user.id else 0,
         })
         
     return response
@@ -66,7 +66,7 @@ async def get_months_list(temp_from: str = "",
 async def get_months_feed(month_id: int | None = None,
                           next_month: bool = Query(default=False, alias="next"),
                             db: AsyncSession = Depends(get_db),
-                            user: User = Depends(get_current_user),
+                            user: User | None = Depends(get_current_user_optional),
                             ):
     likes_count = func.count(MonthLike.id).label("likes_count")
     
@@ -96,12 +96,15 @@ async def get_months_feed(month_id: int | None = None,
     
     month, likes = row
     
-    liked = await db.scalar(
-        select(func.count(MonthLike.id)).where(
-            MonthLike.month_id == month.id,
-            MonthLike.user_id == user.id
+    # Гость лайков не ставит — у него is_liked всегда 0
+    liked = 0
+    if user is not None:
+        liked = await db.scalar(
+            select(func.count(MonthLike.id)).where(
+                MonthLike.month_id == month.id,
+                MonthLike.user_id == user.id
+            )
         )
-    )
 
     return{
         "id": month.id,
